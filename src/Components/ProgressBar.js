@@ -6,7 +6,6 @@ const stateProgressBar = (state,propsProgressBar) => {
     return { stateProps: propsProgressBar };
   };
 const ProgressBarConnect =({stateProps}) => {
-console.log(stateProps)
 
         return (
             <div className="progress md-progress" >

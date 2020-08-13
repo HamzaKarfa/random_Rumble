@@ -12,17 +12,33 @@ const initialState = {
   };
    
 function rootReducer(state = initialState, action) {
+    console.log(action.payload)
+    let newState = null
     switch (action.type) {
         case 'HIT_MONSTER':
-                    const newState = { 
-            ...state,
-            monster : {
-                ...state.monster,
-                pv: state.monster.pv -50
+             newState = { 
+                ...state,
+                monster : {
+                    ...state.monster,
+                    pv: state.monster.pv -50
+                }
             }
-        }
-        return newState
-    
+            return newState
+        case 'HIT_BACK':
+            newState = { 
+                ...state,
+                players : {
+                    ...state.players,
+                    [action.payload]:{
+
+                        ...state.players[action.payload],
+                        pv: state.players[action.payload].pv -10
+                    }
+                    
+                }  
+            }
+            return newState
+            
         default: 
             return state
     

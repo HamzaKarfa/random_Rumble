@@ -1,16 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { hitMonster } from "../action/index";
-const dispatchButtonCapacity =(dispatch) =>{
+import { hitBack } from "../action/index";
+
+const dispatchButtonCapacity =(dispatch,stateProps) =>{
+
     return {
-        hitMonsters: () => { dispatch(hitMonster()) }
+        hitMonsters: () => { dispatch(hitMonster()) },
+        hitBack: () => { dispatch(hitBack(stateProps.player.id)) }
       }
+
    };
 
-const ButtonCapacityConnect =({hitMonsters})=> {
+   const stateButtonCapacity = (state,propsButtonCapacity) => {
+    
+    return { stateProps: propsButtonCapacity };
+
+  };
+const ButtonCapacityConnect =({hitMonsters,hitBack,stateProps})=> {
         const combat = () => {
             console.log('aie')
-            return hitMonsters()
+            return( hitMonsters(), hitBack(stateProps.player.id))
         }
 
         return (
@@ -24,7 +34,7 @@ const ButtonCapacityConnect =({hitMonsters})=> {
 
 }
 
-const ButtonCapacity = connect(null,dispatchButtonCapacity)(ButtonCapacityConnect)
+const ButtonCapacity = connect(stateButtonCapacity,dispatchButtonCapacity)(ButtonCapacityConnect)
 
 
 export default ButtonCapacity;
