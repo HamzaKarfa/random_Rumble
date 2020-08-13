@@ -4,7 +4,7 @@ import ProgressBar from './ProgressBar';
 
 
 const stateMonster = (state) => {
-  console.log(state)
+
   return { monster: state.monster };
   
 };
