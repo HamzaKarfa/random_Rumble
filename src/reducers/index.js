@@ -6,7 +6,7 @@ const initialState = {
         1: { name: "Jul", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1  , played:0 },
         2: { name: "Booba", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2  , played:0 },
         3: { name: "Sofiane", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3 , played:0 },
-        4: { name: "Heuss l'enfoiré", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 4 , played:0 }
+        4: { name: "Heuss l'enfoiré", pv: 65, pvMax: 100, mana: 4, manaMax: 30, id: 4 , played:0 }
     },
     monster: {pvMax : 1000, pv:1000},
     playerTurn: []
@@ -43,15 +43,39 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 playerTurn :  state.playerTurn.concat(action.payload.id)
             }
-            return newState
-                
+            return newState     
         case 'RESET_TOUR':
             newState = { 
                 ...state,
                 playerTurn :  []
             }
             return newState
-                
+        case 'HEAL_PLAYER':
+            newState = { 
+                ...state,
+                players : {
+                    ...state.players,
+                    [action.payload]:{
+                        ...state.players[action.payload],
+                        pv: state.players[action.payload].pv +5,
+                        mana: state.players[action.payload].mana -5
+                    }
+                }  
+            }
+            return newState     
+        case 'MANA_PLAYER':
+            newState = { 
+                ...state,
+                players : {
+                    ...state.players,
+                    [action.payload]:{
+                        ...state.players[action.payload],
+                        pv: state.players[action.payload].pv -5,
+                        mana: state.players[action.payload].mana +5
+                    }
+                }  
+            }
+            return newState        
         default: 
             return state
     
@@ -59,7 +83,5 @@ function rootReducer(state = initialState, action) {
       
   };
 
-  
-   
   export default rootReducer;
   

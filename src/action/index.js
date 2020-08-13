@@ -17,4 +17,13 @@ export  function resetTour(payload) {
 
     return { type: "RESET_TOUR", payload }
 };
+
+export  function healPlayer(payload) {
+
+    return { type: "HEAL_PLAYER", payload }
+};
+export  function getMana(payload) {
+
+    return { type: "MANA_PLAYER", payload }
+};
   

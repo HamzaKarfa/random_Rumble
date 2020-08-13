@@ -22,9 +22,7 @@ const PlayerCardConnect=({stateProps, playerTurn})=> {
                         <div className="row ">
                             <div >
                                 <ButtonCapacity player={stateProps.player} played = {true}/>
-                                <ButtonCapacity player={stateProps.player} played = {true}/>
-                                <ButtonCapacity player={stateProps.player} played = {true}/>
-                                <ButtonCapacity player={stateProps.player} played = {true}/>
+
     
                             </div>
                         </div >
@@ -44,9 +42,7 @@ const PlayerCardConnect=({stateProps, playerTurn})=> {
                         <div className="row ">
                             <div >
                                 <ButtonCapacity player={stateProps.player} />
-                                <ButtonCapacity player={stateProps.player} />
-                                <ButtonCapacity player={stateProps.player} />
-                                <ButtonCapacity player={stateProps.player} />
+
     
                             </div>
                         </div >
