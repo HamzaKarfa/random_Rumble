@@ -8,7 +8,7 @@ import { getMana } from "../action/index";
 
 const dispatchButtonCapacity =(dispatch,stateProps) =>{
     return {
-        hitMonsters: () => { dispatch(hitMonster()) },
+        hitMonsters: () => { dispatch(hitMonster(stateProps.player.id)) },
         hitBack: () => { dispatch(hitBack(stateProps.player.id)) },
         addPlayerTurns: () => { dispatch(addPlayerTurn(stateProps.player)) },
         healPlayers: () => { dispatch(healPlayer(stateProps.player.id)) },

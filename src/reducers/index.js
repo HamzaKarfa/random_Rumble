@@ -22,7 +22,15 @@ function rootReducer(state = initialState, action) {
                 monster : {
                     ...state.monster,
                     pv: state.monster.pv -50
-                }
+                },
+                players : {
+                    ...state.players,
+                    [action.payload]:{
+                        ...state.players[action.payload],
+                        mana: state.players[action.payload].mana -5,
+                        
+                    }
+                }  
             }
             return newState
         case 'HIT_BACK':
