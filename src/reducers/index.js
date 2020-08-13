@@ -3,13 +3,13 @@ import React from 'react'
 const initialState = {
     //TODO : complete players {} and monster{}
     players: {
-        1: { name: "John", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1  , played:0 },
-        2: { name: "Jack", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2  , played:0 },
-        3: { name: "Jessy", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3 , played:0 },
-        4: { name: "Jenny", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 4 , played:0 }
+        1: { name: "Jul", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1  , played:0 },
+        2: { name: "Booba", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2  , played:0 },
+        3: { name: "Sofiane", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3 , played:0 },
+        4: { name: "Heuss l'enfoiré", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 4 , played:0 }
     },
     monster: {pvMax : 1000, pv:1000},
-    playerTurn: {}
+    playerTurn: []
   };
    
 function rootReducer(state = initialState, action) {
@@ -31,42 +31,25 @@ function rootReducer(state = initialState, action) {
                 players : {
                     ...state.players,
                     [action.payload]:{
-
                         ...state.players[action.payload],
                         pv: state.players[action.payload].pv -10,
                         played: state.players[action.payload].played = 1
                     }
-                    
                 }  
             }
             return newState
-        case 'RESET_TOUR':
-            // for (let index = 0; index < 4; index++) {
-            //     console.log(state.players[index])
-            // }
+        case 'ADD_PLAYER_TURN':
             newState = { 
                 ...state,
-                players : {
-                    ...state.players,
-                     1:{
-                         ...state.players[1],
-                          played: 0
-                     },
-                     2:{
-                        ...state.players[2],
-                         played: 0
-                    },
-                    3:{
-                        ...state.players[3],
-                         played: 0
-                    },
-                    4:{
-                        ...state.players[4],
-                         played: 0
-                    }
-                }  
+                playerTurn :  state.playerTurn.concat(action.payload.id)
             }
-            console.log(newState)
+            return newState
+                
+        case 'RESET_TOUR':
+            newState = { 
+                ...state,
+                playerTurn :  []
+            }
             return newState
                 
         default: 

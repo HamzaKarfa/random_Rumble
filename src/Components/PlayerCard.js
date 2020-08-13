@@ -4,56 +4,58 @@ import ProgressBar from './ProgressBar';
 import { connect } from "react-redux";
 
 const statePlayerCard = (state,propsPlayerCard) => {
-    
-    return { stateProps: propsPlayerCard };
+    return { stateProps: propsPlayerCard , playerTurn : state.playerTurn };
   };
-const PlayerCardConnect=({stateProps})=> {
+const PlayerCardConnect=({stateProps, playerTurn})=> {
 
-    if (stateProps.player.played){
-        return (
-            <div key={stateProps.player.id} className="col-sm-3 card center bg-secondary" id={`joueur${stateProps.player.id}`}>
-                <div className="card-body text-center">
-                    <h5 className="card-title">{stateProps.player.name}</h5>
-                    <ProgressBar pv={stateProps.player.pv} pvMax={stateProps.player.pvMax} faType='fa-heart' barName=' : pv ' bgType='bg-danger' />
-                    <ProgressBar pv={stateProps.player.mana} pvMax={stateProps.player.manaMax} faType='fa-fire-alt' barName=' : mana ' />
+    const displayPlayer = () => {
 
-                    <span className="badge badge-danger ml-2 " id="degatSpanJ1"></span>
-                    <div className="row ">
-                        <div >
-                            <ButtonCapacity player={stateProps.player} />
-                            <ButtonCapacity player={stateProps.player} />
-                            <ButtonCapacity player={stateProps.player} />
-                            <ButtonCapacity player={stateProps.player} />
-
-                        </div>
-                    </div >
-                </div >
-            </div >
-        )
-    }else{
-
-        return (
-            <div key={stateProps.player.id} className="col-sm-3 card center" id={`joueur${stateProps.player.id}`}>
-                <div className="card-body text-center">
-                    <h5 className="card-title">{stateProps.player.name}</h5>
-                    <ProgressBar pv={stateProps.player.pv} pvMax={stateProps.player.pvMax} faType='fa-heart' barName=' : pv ' bgType='bg-danger' />
-                    <ProgressBar pv={stateProps.player.mana} pvMax={stateProps.player.manaMax} faType='fa-fire-alt' barName=' : mana ' />
-
-                    <span className="badge badge-danger ml-2 " id="degatSpanJ1"></span>
-                    <div className="row ">
-                        <div >
-                            <ButtonCapacity player={stateProps.player} />
-                            <ButtonCapacity player={stateProps.player} />
-                            <ButtonCapacity player={stateProps.player} />
-                            <ButtonCapacity player={stateProps.player} />
-
-                        </div>
-                    </div >
-                </div >
-            </div >
-        )
-    }
+        if (playerTurn.lentgth !== 0 && playerTurn.includes(stateProps.player.id)) {
+            return  (
+                <div key={stateProps.player.id} className="col-sm-3 card center bg-secondary" id={`joueur${stateProps.player.id}`}>
+                    <div className="card-body text-center">
+                        <h5 className="card-title">{stateProps.player.name}</h5>
+                        <ProgressBar pv={stateProps.player.pv} pvMax={stateProps.player.pvMax} faType='fa-heart' barName=' : pv ' bgType='bg-danger' />
+                        <ProgressBar pv={stateProps.player.mana} pvMax={stateProps.player.manaMax} faType='fa-fire-alt' barName=' : mana ' />
     
+                        <span className="badge badge-danger ml-2 " id="degatSpanJ1"></span>
+                        <div className="row ">
+                            <div >
+                                <ButtonCapacity player={stateProps.player} played = {true}/>
+                                <ButtonCapacity player={stateProps.player} played = {true}/>
+                                <ButtonCapacity player={stateProps.player} played = {true}/>
+                                <ButtonCapacity player={stateProps.player} played = {true}/>
+    
+                            </div>
+                        </div >
+                    </div >
+                </div >
+            )
+        } else {
+
+            return (
+                <div key={stateProps.player.id} className="col-sm-3 card center" id={`joueur${stateProps.player.id}`}>
+                    <div className="card-body text-center">
+                        <h5 className="card-title">{stateProps.player.name}</h5>
+                        <ProgressBar pv={stateProps.player.pv} pvMax={stateProps.player.pvMax} faType='fa-heart' barName=' : pv ' bgType='bg-danger' />
+                        <ProgressBar pv={stateProps.player.mana} pvMax={stateProps.player.manaMax} faType='fa-fire-alt' barName=' : mana ' />
+    
+                        <span className="badge badge-danger ml-2 " id="degatSpanJ1"></span>
+                        <div className="row ">
+                            <div >
+                                <ButtonCapacity player={stateProps.player} />
+                                <ButtonCapacity player={stateProps.player} />
+                                <ButtonCapacity player={stateProps.player} />
+                                <ButtonCapacity player={stateProps.player} />
+    
+                            </div>
+                        </div >
+                    </div >
+                </div >
+            )
+        }
+    }
+    return displayPlayer() 
 }
 
 const PlayerCard = connect(statePlayerCard)(PlayerCardConnect) 

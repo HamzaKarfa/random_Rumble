@@ -2,11 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { hitMonster } from "../action/index";
 import { hitBack } from "../action/index";
+import { addPlayerTurn } from "../action/index";
 
 const dispatchButtonCapacity =(dispatch,stateProps) =>{
     return {
         hitMonsters: () => { dispatch(hitMonster()) },
-        hitBack: () => { dispatch(hitBack(stateProps.player.id)) }
+        hitBack: () => { dispatch(hitBack(stateProps.player.id)) },
+        addPlayerTurns: () => { dispatch(addPlayerTurn(stateProps.player)) }
       }
    };
 
@@ -14,13 +16,12 @@ const stateButtonCapacity = (state,propsButtonCapacity) => {
     return { stateProps: propsButtonCapacity };
 };
 
-const ButtonCapacityConnect =({hitMonsters,hitBack,stateProps})=> {
+const ButtonCapacityConnect =({hitMonsters,hitBack,stateProps,addPlayerTurns})=> {
 
         const combat = () => {
-            console.log('aie')
-            return( hitMonsters(), hitBack(stateProps.player.id))
+            return( hitMonsters(), hitBack(stateProps.player.id),addPlayerTurns(stateProps.player))
         }
-        if (stateProps.player.played) {
+        if (stateProps.played) {
             return (
                 <button type="button" onClick={() => combat()} className="btn btn-success material-tooltip-main" disabled>
                     hit
@@ -29,7 +30,6 @@ const ButtonCapacityConnect =({hitMonsters,hitBack,stateProps})=> {
                 </button>
             )
         }else{
-
             return (
                 <button type="button" onClick={() => combat()} className="btn btn-success material-tooltip-main ">
                     hit
