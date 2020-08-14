@@ -63,20 +63,10 @@ const ButtonCapacityConnect =({hitMonsters,hitBack,stateProps,addPlayerTurns,hea
         if (stateProps.played) {
             return (
                 <>
-                    <button type="button" onClick={() => combat()} className="btn btn-success material-tooltip-main" disabled>
-                        hit
-                        <i className="fas fa-bomb"></i> 5
-                        <i className="fas fa-fire-alt"></i> - 5
-                    </button>
                     <button type="button" onClick={() => heal()} className="btn btn-success material-tooltip-main" disabled>
                         heal
                         <i className="fas fa-heart"></i> 5
                         <i className="fas fa-fire-alt"></i> - 5
-                    </button>
-                    <button type="button" onClick={() => mana()} className="btn btn-success material-tooltip-main" disabled>
-                        moula
-                        <i className="fas fa-heart"></i> -5
-                        <i className="fas fa-fire-alt"></i> 5
                     </button>
                 </>
             )
@@ -84,43 +74,23 @@ const ButtonCapacityConnect =({hitMonsters,hitBack,stateProps,addPlayerTurns,hea
             if (stateProps.player.mana < 5) {
                 return (
                     <>
-                        <button type="button" onClick={() => combat()} className="btn btn-success material-tooltip-main ">
-                            hit
-                            <i className="fas fa-bomb"></i> 5
-                            <i className="fas fa-fire-alt"></i> - 5
-                        </button>
                         <button type="button" onClick={() => heal()} className="btn btn-success material-tooltip-main" >
                             heal
                             <i className="fas fa-heart"></i> 5
                             <i className="fas fa-fire-alt"></i> - 5
                         </button>
                         
-                        <button type="button" onClick={() => mana()} className="btn btn-primary material-tooltip-main" disabled>
-                            moula
-                            <i className="fas fa-heart"></i> -5
-                            <i className="fas fa-fire-alt"></i>  5
-                        </button>
                     </>
                 )
             }else{
                 return (
                     <>
-                        <button type="button" onClick={() => combat()} className="btn btn-success material-tooltip-main ">
-                            hit
-                            <i className="fas fa-bomb"></i> 5
-                            <i className="fas fa-fire-alt"></i> - 5
-                        </button>
                         <button type="button" onClick={() => heal()} className="btn btn-success material-tooltip-main" >
                             heal
                             <i className="fas fa-heart"></i> 5
                             <i className="fas fa-fire-alt"></i> - 5
                         </button>
-                        
-                        <button type="button" onClick={() => mana()} className="btn btn-success material-tooltip-main">
-                            moula
-                            <i className="fas fa-heart"></i> -5
-                            <i className="fas fa-fire-alt"></i>  5
-                        </button>
+                    
                     </>
                 )
             }
