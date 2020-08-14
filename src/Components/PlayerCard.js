@@ -4,13 +4,13 @@ import ProgressBar from './ProgressBar';
 import { connect } from "react-redux";
 
 const statePlayerCard = (state,propsPlayerCard) => {
-    return { stateProps: propsPlayerCard , playerTurn : state.playerTurn };
+    return { stateProps: propsPlayerCard , playerTurn : state.playerTurn, };
   };
 const PlayerCardConnect=({stateProps, playerTurn})=> {
 
     const displayPlayer = () => {
 
-        if (playerTurn.lentgth !== 0 && playerTurn.includes(stateProps.player.id)) {
+        if (playerTurn.length !== 0 && playerTurn.includes(stateProps.player.id)) {
             return  (
                 <div key={stateProps.player.id} className="col-sm-3 card center bg-secondary" id={`joueur${stateProps.player.id}`}>
                     <div className="card-body text-center">
@@ -21,7 +21,7 @@ const PlayerCardConnect=({stateProps, playerTurn})=> {
                         <span className="badge badge-danger ml-2 " id="degatSpanJ1"></span>
                         <div className="row ">
                             <div >
-                                <ButtonCapacity player={stateProps.player} played = {true}/>
+                                <ButtonCapacity player={stateProps.player} played = {true} countPlayer = {stateProps.countPlayer} playerList = {stateProps.playerList}/>
 
     
                             </div>
@@ -41,7 +41,7 @@ const PlayerCardConnect=({stateProps, playerTurn})=> {
                         <span className="badge badge-danger ml-2 " id="degatSpanJ1"></span>
                         <div className="row ">
                             <div >
-                                <ButtonCapacity player={stateProps.player} />
+                                <ButtonCapacity player={stateProps.player} countPlayer = {stateProps.countPlayer} playerList = {stateProps.playerList}/>
 
     
                             </div>

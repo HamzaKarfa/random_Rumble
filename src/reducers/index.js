@@ -3,10 +3,10 @@ import React from 'react'
 const initialState = {
     //TODO : complete players {} and monster{}
     players: {
-        1: { name: "Jul", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1  , played:0 },
-        2: { name: "Booba", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2  , played:0 },
-        3: { name: "Sofiane", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3 , played:0 },
-        4: { name: "Heuss l'enfoiré", pv: 65, pvMax: 100, mana: 4, manaMax: 30, id: 4 , played:0 }
+        1: { name: "Jul", pv: 10, pvMax: 100, mana: 50, manaMax: 50, id: 1 },
+        2: { name: "Booba", pv: 100, pvMax: 100, mana: 50, manaMax: 50, id: 2 },
+        3: { name: "Sofiane", pv: 100, pvMax: 100, mana: 50, manaMax: 50, id: 3 },
+        4: { name: "Heuss l'enfoiré", pv: 100, pvMax: 100, mana: 50, manaMax: 50, id: 4 }
     },
     monster: {pvMax : 1000, pv:1000},
     playerTurn: []
@@ -41,7 +41,6 @@ function rootReducer(state = initialState, action) {
                     [action.payload]:{
                         ...state.players[action.payload],
                         pv: state.players[action.payload].pv -10,
-                        played: state.players[action.payload].played = 1
                     }
                 }  
             }
@@ -49,13 +48,13 @@ function rootReducer(state = initialState, action) {
         case 'ADD_PLAYER_TURN':
             newState = { 
                 ...state,
-                playerTurn :  state.playerTurn.concat(action.payload.id)
+                playerTurn : state.playerTurn.concat(action.payload.id)
             }
             return newState     
         case 'RESET_TOUR':
             newState = { 
                 ...state,
-                playerTurn :  []
+                playerTurn : []
             }
             return newState
         case 'HEAL_PLAYER':
@@ -84,6 +83,18 @@ function rootReducer(state = initialState, action) {
                 }  
             }
             return newState        
+        case 'PLAYER_DEAD':
+            newState = { 
+                ...state,
+                players: delete state.players[action.payload],
+                players : {
+                    ...state.players,
+                },
+                playerTurn : []
+
+            }
+            console.log(newState)
+            return newState   
         default: 
             return state
     

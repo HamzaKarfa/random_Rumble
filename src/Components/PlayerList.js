@@ -22,7 +22,7 @@ const PlayerListConnect = ({PlayersList,resetTours,playerTurn}) => {
 
     const displayPlayers = () => {
         return Object.keys(PlayersList).map(key => (
-            <PlayerCard key={PlayersList[key].id} player={PlayersList[key]} />
+            <PlayerCard key={PlayersList[key].id} player={PlayersList[key]} countPlayer ={ countPlayer } playerList={PlayersList}/>
         ));
         }
         if (playerTurn.length === countPlayer) {

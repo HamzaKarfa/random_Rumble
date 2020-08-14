@@ -5,40 +5,61 @@ import { hitBack } from "../action/index";
 import { addPlayerTurn } from "../action/index";
 import { healPlayer } from "../action/index";
 import { getMana } from "../action/index";
+import { playerDead } from "../action/index";
 
+
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    let result = Math.floor(Math.random() * (max - min +1)) + min;
+    console.log(result)
+    return result
+  }
+const stateButtonCapacity = (state,propsButtonCapacity) => {
+    return { stateProps: propsButtonCapacity, players : state.players };
+};
 const dispatchButtonCapacity =(dispatch,stateProps) =>{
     return {
         hitMonsters: () => { dispatch(hitMonster(stateProps.player.id)) },
-        hitBack: () => { dispatch(hitBack(stateProps.player.id)) },
+        hitBack: () => { dispatch(hitBack(getRandomIntInclusive(stateProps.playerList[Object.keys(stateProps.playerList)[0]].id, stateProps.countPlayer))) },
         addPlayerTurns: () => { dispatch(addPlayerTurn(stateProps.player)) },
         healPlayers: () => { dispatch(healPlayer(stateProps.player.id)) },
         getManas: () => { dispatch(getMana(stateProps.player.id)) },
+        playerDeads: () => { dispatch(playerDead(stateProps.player.id)) },
       }
    };
 
-const stateButtonCapacity = (state,propsButtonCapacity) => {
-    return { stateProps: propsButtonCapacity };
-};
 
-const ButtonCapacityConnect =({hitMonsters,hitBack,stateProps,addPlayerTurns,healPlayers,getManas})=> {
 
+const ButtonCapacityConnect =({hitMonsters,hitBack,stateProps,addPlayerTurns,healPlayers,getManas,playerDeads})=> {
+        if (stateProps.player.pv <= 0) {
+            addPlayerTurns()
+            playerDeads()
+        }
         const combat = () => {
-            return( hitMonsters(), hitBack(),addPlayerTurns())
+            if (stateProps.player.pv > 0  && stateProps.player.mana >= 5 ) {
+                
+                return( hitMonsters(), hitBack(),addPlayerTurns())
+            }
         }
         const heal = () => {
-            console.log (stateProps.player.mana)
             if (stateProps.player.pv !== stateProps.player.pvMax && stateProps.player.mana >= 5 ) {
                 
-                return( healPlayers(),addPlayerTurns())
+                return( hitBack(),healPlayers(),addPlayerTurns())
             }
         }
         const mana = () => {
-            console.log (stateProps.player.mana)
             if (stateProps.player.pv !== stateProps.player.pvMax && stateProps.player.mana >= 5 ) {
                 
-                return( getManas(),addPlayerTurns())
+                return( hitBack(),getManas(),addPlayerTurns())
             }
         }
+
+
+
+
+
+
         if (stateProps.played) {
             return (
                 <>
@@ -60,7 +81,7 @@ const ButtonCapacityConnect =({hitMonsters,hitBack,stateProps,addPlayerTurns,hea
                 </>
             )
         }else{
-            if (stateProps.player.mana <5) {
+            if (stateProps.player.mana < 5) {
                 return (
                     <>
                         <button type="button" onClick={() => combat()} className="btn btn-success material-tooltip-main ">

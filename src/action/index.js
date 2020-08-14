@@ -26,4 +26,7 @@ export  function getMana(payload) {
 
     return { type: "MANA_PLAYER", payload }
 };
-  
+export  function playerDead(payload) {
+
+    return { type: "PLAYER_DEAD", payload }
+};
