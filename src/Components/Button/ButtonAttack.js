@@ -4,7 +4,6 @@ import { hitMonster } from "../../action/index";
 import { hitBack } from "../../action/index";
 import { addPlayerTurn } from "../../action/index";
 import { healPlayer } from "../../action/index";
-import { getMana } from "../../action/index";
 import { playerDead } from "../../action/index";
 
 
@@ -35,9 +34,14 @@ const ButtonCapacityConnect =({hitMonsters,hitBack,stateProps,addPlayerTurns,pla
             addPlayerTurns()
             playerDeads()
         }
+        function timeOutHitBack(){
+            setTimeout(() => {
+                hitBack()
+            }, 600);
+        }
         const combat = () => {
             if (stateProps.player.pv > 0  && stateProps.player.mana >= 5 && !stateProps.played ) {
-                return( hitMonsters(), hitBack(),addPlayerTurns())
+                return( hitMonsters(), timeOutHitBack(),addPlayerTurns())
             }
         }
 

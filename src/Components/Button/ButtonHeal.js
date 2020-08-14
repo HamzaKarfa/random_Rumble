@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { hitMonster } from "../../action/index";
 import { hitBack } from "../../action/index";
 import { addPlayerTurn } from "../../action/index";
 import { healPlayer } from "../../action/index";
-import { getMana } from "../../action/index";
 import { playerDead } from "../../action/index";
 
 

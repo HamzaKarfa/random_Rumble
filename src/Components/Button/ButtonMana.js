@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { hitMonster } from "../../action/index";
 import { hitBack } from "../../action/index";
 import { addPlayerTurn } from "../../action/index";
-import { healPlayer } from "../../action/index";
 import { getMana } from "../../action/index";
 import { playerDead } from "../../action/index";
 
@@ -30,6 +28,7 @@ const dispatchButtonCapacity =(dispatch,stateProps) =>{
 
 
 const ButtonCapacityConnect =({hitBack,stateProps,addPlayerTurns,getManas,playerDeads})=> {
+
         if (stateProps.player.pv <= 0) {
             addPlayerTurns()
             playerDeads()

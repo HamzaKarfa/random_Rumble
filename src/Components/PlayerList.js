@@ -29,7 +29,7 @@ const PlayerListConnect = ({PlayersList,resetTours,playerTurn}) => {
             return (resetTours(),displayPlayers())
         }
     return (
-        <div className='row'>
+        <div className='row justify-content-center'>
             {displayPlayers()}
         </div>
     );
